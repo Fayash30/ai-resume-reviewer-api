@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from schemas import ResumeRequest, ResumeReviewResponse
 from services import analyze_resume, get_project_metadata
 
@@ -14,10 +14,14 @@ def info(project_metadata: dict = Depends(get_project_metadata)):
     response_model=ResumeReviewResponse
 )
 def review_resume(request: ResumeRequest):
+    try:
+        return analyze_resume(request.resume)
 
-    review = analyze_resume(request.resume)
-
-    return review
+    except Exception:
+        raise HTTPException(
+            status_code=503,
+            detail="AI review service is temporarily unavailable."
+        )
 
 @app.get("/about")
 def about():

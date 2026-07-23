@@ -1,9 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ResumeRequest(BaseModel):
-    resume: str
-
+    resume: str = Field(
+        min_length=50,
+        description="Extracted resume text to analyze"
+    )
+ 
 class ResumeReviewResponse(BaseModel):
     score: int
     strengths: list[str]

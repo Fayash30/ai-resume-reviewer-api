@@ -47,13 +47,16 @@ that are not present in the resume.
 
 
 # print(test_gemini())
-
+GEMINI_MODEL = os.getenv(
+    "GEMINI_MODEL",
+    "gemini-3-flash-preview"
+)
 def analyze_resume(resume: str) -> ResumeReviewResponse:
 
     prompt = build_resume_prompt(resume)
 
     response = client.models.generate_content(
-        model="gemini-3-flash-preview",
+        model=GEMINI_MODEL,
         contents=prompt,
         config={
             "response_mime_type": "application/json",
