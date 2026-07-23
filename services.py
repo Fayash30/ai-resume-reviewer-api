@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from schemas import ResumeReviewResponse
 import os
 
@@ -66,6 +67,8 @@ def analyze_resume(resume: str) -> ResumeReviewResponse:
     )
 
 
+=======
+>>>>>>> 1ba8d2c5e0f4686503c550b19768ad559420747c
 def get_app_name():
     return "AI Resume Reviewer API"
 
